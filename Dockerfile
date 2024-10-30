@@ -11,4 +11,4 @@ COPY /server/models.py  /API_WITH_AIOHTP_CLIENT/server
 COPY /server/client.py  /API_WITH_AIOHTP_CLIENT/server
 COPY /server/async_client.py  /API_WITH_AIOHTP_CLIENT/server
 
-CMD [ "python","server/main.py"]
+CMD [ "uvicorn","run","server/main.py"]

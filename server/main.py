@@ -66,9 +66,3 @@ async def get_date_price(
         print("Записей не найдено")
     return response
 
-
-
-
-
-
-#cd C:\Users\artem\.vscode\API_with_aiohtp_client\server 

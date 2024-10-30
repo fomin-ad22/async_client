@@ -1,5 +1,0 @@
-fastapi[standard]>=0.113.0
-pydantic >= 2.9.2
-sqlmodel >= 0.0.22
-SQLAlchemy >= 2.0.36
-requests >= 2.32.3

@@ -1,7 +1,8 @@
 import asyncio
 import aiohttp
-from sqlmodel import Session,select
-from main import Currency,engine
+from sqlmodel import Session
+from main import engine
+from models import Currency
 
 async def fetch_currency_data(session:aiohttp.ClientSession,ticker:str)->dict:
     url=f"https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency={ticker}&kind=future"
@@ -31,9 +32,9 @@ async def update_currency_database(session: aiohttp.ClientSession):
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        while True:
-            await update_currency_database(session)
-            await asyncio.sleep(60)
+      while True:
+        await update_currency_database(session)
+        await asyncio.sleep(60)
 
 if __name__ =="__main__":
   print("Run")

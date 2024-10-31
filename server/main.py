@@ -1,10 +1,14 @@
 from fastapi import FastAPI,Query,Depends
 from sqlmodel import create_engine,SQLModel,Session,select,func
+
+engine=create_engine("sqlite:///./database.db",connect_args={"check_same_thread": False})  
+
 from models import Currency
 from typing import List
 from datetime import datetime
+import asyncio
+import async_client 
 
-engine = create_engine("sqlite:///./database.db",connect_args={"check_same_thread": False})
 
 def get_session():
     with Session(engine) as session:
@@ -15,8 +19,9 @@ app= FastAPI()
 @app.on_event("startup")
 def on_startup():
     SQLModel.metadata.create_all(engine)
-    
+    asyncio.create_task(async_client.main())
 
+    
 @app.get("/currency",response_model=List[Currency])
 async def get_story_price(
     ticker:str=Query(required = True,description="Enter currency name btc_usd or eth_usd"),
